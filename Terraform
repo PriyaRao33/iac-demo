@@ -1,0 +1,23 @@
+pipeline{
+agent any
+tools {
+terraform 'terraform'
+}
+stages{
+stage("Git checkout"){
+steps{
+git credentialsId: 'chinnu11', url: 'https://github.com/PriyaRao33/iac-demo.git'
+}
+}
+stage("Terraform init"){
+steps{
+sh label:'',script:'terraform init'
+}
+}
+stage("Terraform Apply"){
+steps{
+sh label:'',script:'terraform destroy --auto-approve'
+}
+}
+}
+}
